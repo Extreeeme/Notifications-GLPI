@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/all.css">
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<script src="config.js"></script>
+</head>
+
+<body id="documentation" onload="startup()">
+	<header id="titlebar">
+		<div id="drag-region">
+			<div id="window-controls">
+				<div class="button" id="min-button">
+				  <img class="icon" srcset="file:///resources/assets/icons/min-w-10.png 1x, file:///resources/assets/icons/min-w-12.png 1.25x, file:///resources/assets/icons/min-w-15.png 1.5x, file:///resources/assets/icons/min-w-15.png 1.75x, file:///resources/assets/icons/min-w-20.png 2x, file:///resources/assets/icons/min-w-20.png 2.25x, file:///resources/assets/icons/min-w-24.png 2.5x, file:///resources/assets/icons/min-w-30.png 3x, file:///resources/assets/icons/min-w-30.png 3.5x" draggable="false" />
+				</div>
+		  
+				<div class="button" id="close-button">
+				  <img class="icon" srcset="file:///resources/assets/icons/close-w-10.png 1x, file:///resources/assets/icons/close-w-12.png 1.25x, file:///resources/assets/icons/close-w-15.png 1.5x, file:///resources/assets/icons/close-w-15.png 1.75x, file:///resources/assets/icons/close-w-20.png 2x, file:///resources/assets/icons/close-w-20.png 2.25x, file:///resources/assets/icons/close-w-24.png 2.5x, file:///resources/assets/icons/close-w-30.png 3x, file:///resources/assets/icons/close-w-30.png 3.5x" draggable="false" />
+				</div>
+		  
+			  </div>
+		</div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="cols12">
+                <h3 class="h2-doc">📖 Documentation</h3>
+                <hr>
+                <h5><i class="fas fa-globe"></i> Tester la page GLPI</h5>
+                <p>Pour fonctionner, l'application fait appel à la page GLPI <span id="lien1"></span>.
+                <br>Cliquez sur ce lien afin de vérifier le contenu de la page (si une authentification est demandée, rentrez vos identifiants puis <u>recliquez sur le lien ci-dessus</u> afin de ne pas être dépendant
+                 de la redirection imposée par GLPI après la connexion)</p>
+
+                <h6><i class="fas fa-arrow-circle-right" style="color: rgb(141, 80, 255);"></i> Résulats attendus sur la page :</h6>
+                <p><i class="fas fa-check" style="color: #51cf66;"></i> Vérifier que l'utilisateur par défaut est bien celui traitant les tickets</p>
+                <img src="file:///resources/assets/tuto1.jpg" alt="">
+                <p><i class="fas fa-check" style="color: #51cf66;"></i> Vérifier ensuite que le filtre par défaut est le bon</p>
+                <img src="file:///resources/assets/tuto2.jpg" alt="">
+                <p><i class="fas fa-check" style="color: #51cf66;"></i> Et enfin que vos tickets sont bien présents</p>
+                <img width="900" src="file:///resources/assets/tuto3.jpg" alt="">
+                <p>Si ces éléments ne sont pas corrects, suivre les étapes ci-dessous.</p>
+                
+                <h5><i class="fas fa-user-cog"></i> Utilisateur par défaut</h5>
+                <p>Il est possible de modifier l'utilisateur par défaut depuis son profil GLPI</p>
+                <img src="file:///resources/assets/tuto4.jpg" alt="">
+                <p>Choisir l'utilisateur dans la liste déroulante puis valider.</p>
+                <img width="900" src="file:///resources/assets/tuto5.jpg" alt="">
+                <p>En revenant sur la page <span id="lien2"></span>, l'utilisateur connecté devrait être correct.</p>
+                    
+                <h5><i class="fas fa-filter"></i> Filtres par défaut</h5>
+                <p>Les filtres par défaut peuvent également être modifiés dans GLPI, pour cela il faut commencer par remplir une liste de règles dans la recherche, puis l'ajouter aux favoris</p>
+                <img src="file:///resources/assets/tuto6.jpg" alt="">
+
+                <p>Cliquer ensuite sur les favoris GLPI pour les afficher</p>
+                <img src="file:///resources/assets/tuto7.jpg" alt="">
+
+                <p>Puis cliquer sur une étoile pour sélectionner le filtre considéré comme filtre par défaut</p>
+				<img src="file:///resources/assets/tuto8.jpg" alt="">
+				
+				<hr>
+
+                <div style="text-align: center;">
+                    <h5>🚀 Vous pouvez maintenant fermer cette fenêtre puis cliquer sur</h5>
+                    <h5>"Activer les notifications"</h5>
+                    <h5>dans la fenêtre d'accueil !</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="js/all.js"></script>
+	<script>
+		// BOUTONS
+		const remote = require('electron').remote;
+
+		// When document has loaded, initialise
+		document.onreadystatechange = () => {
+			if (document.readyState == "complete") {
+				handleWindowControls();
+			}
+		};
+
+		function startup() {
+			document.getElementById('lien1').innerHTML += '<a target="_blank" href="'+ config['URL'] +'/front/ticket.php?reset=reset">'+ config['URL'] +'/front/ticket.php?reset=reset</a>'
+			document.getElementById('lien2').innerHTML += '<a target="_blank" href="'+ config['URL'] +'/front/ticket.php?reset=reset">'+ config['URL'] +'/front/ticket.php?reset=reset</a>'
+			
+		}
+
+		function handleWindowControls() {
+
+			let win = remote.getCurrentWindow();
+			// Make minimise/maximise/restore/close buttons work when they are clicked
+			document.getElementById('min-button').addEventListener("click", event => {
+				win.minimize();
+			});
+
+			document.getElementById('close-button').addEventListener("click", event => {
+				win.close();
+			});
+		}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/all.css">
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body onload="startupTimeout()">
+	<div class="card card-index">
+		<header id="titlebar">
+			<div id="drag-region">
+				<a target="_blank" href="https://github.com/Extreeeme/Notifications-GLPI" id="github"><img style="width:30px" src="file:///resources/assets/github.png" alt=""></a>
+				<div id="window-controls">
+					<div class="button" id="min-button">
+					  <img class="icon" srcset="file:///resources/assets/icons/min-w-10.png 1x, file:///resources/assets/icons/min-w-12.png 1.25x, file:///resources/assets/icons/min-w-15.png 1.5x, file:///resources/assets/icons/min-w-15.png 1.75x, file:///resources/assets/icons/min-w-20.png 2x, file:///resources/assets/icons/min-w-20.png 2.25x, file:///resources/assets/icons/min-w-24.png 2.5x, file:///resources/assets/icons/min-w-30.png 3x, file:///resources/assets/icons/min-w-30.png 3.5x" draggable="false" />
+					</div>
+			  
+					<div class="button" id="close-button">
+					  <img class="icon" srcset="file:///resources/assets/icons/close-w-10.png 1x, file:///resources/assets/icons/close-w-12.png 1.25x, file:///resources/assets/icons/close-w-15.png 1.5x, file:///resources/assets/icons/close-w-15.png 1.75x, file:///resources/assets/icons/close-w-20.png 2x, file:///resources/assets/icons/close-w-20.png 2.25x, file:///resources/assets/icons/close-w-24.png 2.5x, file:///resources/assets/icons/close-w-30.png 3x, file:///resources/assets/icons/close-w-30.png 3.5x" draggable="false" />
+					</div>
+			  
+				  </div>
+			</div>
+		</header>
+		<div class="card-content white-text card-content-perso">
+			<h3>CKOIKIVAPA</h3>
+			<p>Un ticket ?</p>
+			<p>Une notification.</p>
+		</div>
+		<!-- red darken-4 -->
+		<div class="card-action card-foot" id="active-notif-js">
+				<div></div>
+				<div class="loader">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+						<rect x="0" y="13" width="4" height="5" fill="#333">
+						<animate attributeName="height" attributeType="XML"
+							values="5;21;5" 
+							begin="0s" dur="0.6s" repeatCount="indefinite" />
+						<animate attributeName="y" attributeType="XML"
+							values="13; 5; 13"
+							begin="0s" dur="0.6s" repeatCount="indefinite" />
+						</rect>
+						<rect x="10" y="13" width="4" height="5" fill="#333">
+						<animate attributeName="height" attributeType="XML"
+							values="5;21;5" 
+							begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+						<animate attributeName="y" attributeType="XML"
+							values="13; 5; 13"
+							begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+						</rect>
+						<rect x="20" y="13" width="4" height="5" fill="#333">
+						<animate attributeName="height" attributeType="XML"
+							values="5;21;5" 
+							begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+						<animate attributeName="y" attributeType="XML"
+							values="13; 5; 13"
+							begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+						</rect>
+					</svg>
+				</div>
+			<div style="display: flex; flex-direction: column; text-align: right;">
+				<a href='#' id="doc" class='white-text text-darken-4' onclick='problem()'>Documentation</a>
+			</div>
+		</div>
+	</div>
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="js/all.js"></script>
+	<script>
+		let $ = require('jquery');
+		const { ipcRenderer } = require('electron');
+
+        function activeNotifs() {
+			document.getElementById("active-notif-js").innerHTML = '<div></div><div class="loader"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve"><rect x="0" y="13" width="4" height="5" fill="#333"><animate attributeName="height" attributeType="XML"	values="5;21;5" 	begin="0s" dur="0.6s" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML"	values="13; 5; 13"	begin="0s" dur="0.6s" repeatCount="indefinite" /></rect><rect x="10" y="13" width="4" height="5" fill="#333"><animate attributeName="height" attributeType="XML"	values="5;21;5" 	begin="0.15s" dur="0.6s" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML"	values="13; 5; 13"	begin="0.15s" dur="0.6s" repeatCount="indefinite" /></rect><rect x="20" y="13" width="4" height="5" fill="#333"><animate attributeName="height" attributeType="XML"	values="5;21;5" 	begin="0.3s" dur="0.6s" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML"	values="13; 5; 13"	begin="0.3s" dur="0.6s" repeatCount="indefinite" /></rect></svg></div><div style="display: flex; flex-direction: column; text-align: right;"><a href="#" id="doc" class="white-text text-darken-4" onclick="problem()">Documentation</a></div>';
+			ipcRenderer.send('request'); 
+		}
+
+		function problem() {
+			ipcRenderer.send('problem');
+		}
+
+		// BOUTONS
+		const remote = require('electron').remote;
+
+		// When document has loaded, initialise
+		document.onreadystatechange = () => {
+			if (document.readyState == "complete") {
+				handleWindowControls();
+			}
+		};
+
+		function startupTimeout() {setTimeout(startup, 2000);}
+
+		function startup() {
+			document.getElementById("active-notif-js").innerHTML = "<a href='#' onclick='activeNotifs()'><span class='card panel notif-active white-text'><i class='red-text far fa-envelope fa-lg'></i> Notifications désactivées</span></a><div style='display: flex; flex-direction: column; text-align: right;'><a href='#' id='doc' class='white-text text-darken-4' onclick='problem()'>Documentation</a></div>";
+		}
+
+		function handleWindowControls() {
+
+			let win = remote.getCurrentWindow();
+			// Make minimise/maximise/restore/close buttons work when they are clicked
+			document.getElementById('min-button').addEventListener("click", event => {
+				win.minimize();
+			});
+
+			document.getElementById('close-button').addEventListener("click", event => {
+				win.close();
+			});
+		}
+    </script>
+</body>
+
+</html>

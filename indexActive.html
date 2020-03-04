@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/all.css">
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body onload="startupTimeout()">
+	<div class="card card-index">
+        <header id="titlebar">
+			<div id="drag-region">
+                <a target="_blank" href="https://github.com/Extreeeme/Notifications-GLPI" id="github"><img style="width:30px" src="file:///resources/assets/github.png" alt=""></a>
+				<div id="window-controls">
+					<div class="button" id="min-button">
+					  <img class="icon" srcset="file:///resources/assets/icons/min-w-10.png 1x, file:///resources/assets/icons/min-w-12.png 1.25x, file:///resources/assets/icons/min-w-15.png 1.5x, file:///resources/assets/icons/min-w-15.png 1.75x, file:///resources/assets/icons/min-w-20.png 2x, file:///resources/assets/icons/min-w-20.png 2.25x, file:///resources/assets/icons/min-w-24.png 2.5x, file:///resources/assets/icons/min-w-30.png 3x, file:///resources/assets/icons/min-w-30.png 3.5x" draggable="false" />
+					</div>
+			  
+					<div class="button" id="close-button">
+					  <img class="icon" srcset="file:///resources/assets/icons/close-w-10.png 1x, file:///resources/assets/icons/close-w-12.png 1.25x, file:///resources/assets/icons/close-w-15.png 1.5x, file:///resources/assets/icons/close-w-15.png 1.75x, file:///resources/assets/icons/close-w-20.png 2x, file:///resources/assets/icons/close-w-20.png 2.25x, file:///resources/assets/icons/close-w-24.png 2.5x, file:///resources/assets/icons/close-w-30.png 3x, file:///resources/assets/icons/close-w-30.png 3.5x" draggable="false" />
+					</div>
+			  
+				  </div>
+			</div>
+		</header>
+		<div class="card-content white-text card-content-perso">
+			<h3>CKOIKIVAPA</h3>
+			<p>Un ticket ?</p>
+			<p>Une notification.</p>
+		</div>
+		<div class="card-action card-foot card-action-valid">
+			<a href="#" onclick="disableNotif()"><span class="card panel notif-active white-text"><i class="purple-text far fa-envelope fa-lg"></i> Notifications activées</span></a>
+			<div id="infos">
+            <div><p></p><div>
+                <div class="loader-active">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+						<rect x="0" y="13" width="4" height="5" fill="#333">
+						<animate attributeName="height" attributeType="XML"
+							values="5;21;5" 
+							begin="0s" dur="0.6s" repeatCount="indefinite" />
+						<animate attributeName="y" attributeType="XML"
+							values="13; 5; 13"
+							begin="0s" dur="0.6s" repeatCount="indefinite" />
+						</rect>
+						<rect x="10" y="13" width="4" height="5" fill="#333">
+						<animate attributeName="height" attributeType="XML"
+							values="5;21;5" 
+							begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+						<animate attributeName="y" attributeType="XML"
+							values="13; 5; 13"
+							begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+						</rect>
+						<rect x="20" y="13" width="4" height="5" fill="#333">
+						<animate attributeName="height" attributeType="XML"
+							values="5;21;5" 
+							begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+						<animate attributeName="y" attributeType="XML"
+							values="13; 5; 13"
+							begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+						</rect>
+					</svg>
+				</div>
+            </div>
+		</div>
+	</div>
+    <script>
+    const Store = require('electron-store');
+    const store = new Store();
+    const { ipcRenderer } = require('electron');
+    function numStr(a, b) {
+        a = '' + a;
+        b = b || ' ';
+        var c = '',
+            d = 0;
+        while (a.match(/^0[0-9]/)) {
+            a = a.substr(1);
+        }
+        for (var i = a.length-1; i >= 0; i--) {
+            c = (d != 0 && d % 3 == 0) ? a[i] + b + c : a[i] + c;
+            d++;
+        }
+        return c;
+    }
+
+    function startupTimeout() {setTimeout(startup, 1000);}
+
+    function disableNotif() {
+        ipcRenderer.send('stop-notif');
+    }
+
+    function startup() {
+        var user = store.get('user');
+        var id = store.get('ticketID');
+        var date = store.get('ticketDate');
+        if (typeof date !== 'undefined' && date != ' ' && date != "") {
+            date = date.split(' ');
+        } else {
+            date = null;
+        }
+        id = id.split('Ticket');
+        id = numStr(id[1]);
+        
+        if(date != null) {
+            document.getElementById('infos').innerHTML = '<span id="user" class="white-text">'+user+'</span><br><span id="ticketID" class="white-text">ID dernier ticket : '+id+'</span><br><span class="white-text">Le ' + date[0] + ' à ' + date[1] + '</span>';
+        }
+    }
+
+    function notif () {
+        ipcRenderer.send('notifs'); 
+    }
+
+
+    var intervalID = window.setInterval(notif, 300000);
+
+    // BOUTONS
+	const remote = require('electron').remote;
+
+    // When document has loaded, initialise
+    document.onreadystatechange = () => {
+        if (document.readyState == "complete") {
+            handleWindowControls();
+        }
+    };
+
+    function handleWindowControls() {
+
+        let win = remote.getCurrentWindow();
+        // Make minimise/maximise/restore/close buttons work when they are clicked
+        document.getElementById('min-button').addEventListener("click", event => {
+            win.minimize();
+        });
+
+        document.getElementById('close-button').addEventListener("click", event => {
+            win.close();
+        });
+    }
+    </script>
+</body>
+</html>

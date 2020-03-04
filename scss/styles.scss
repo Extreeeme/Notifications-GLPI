@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway:100&display=swap');
+
+body {
+    background-color: #F1F1F1;
+    font-family: 'Montserrat', ;
+    max-height: 330;
+    padding: 0;
+    margin: 0;
+}
+// BOUTONS
+
+#titlebar {
+    display: block;
+    position: fixed;
+    height: 32px;
+    width: calc(100% - 0px);
+    padding: 4px;
+    color: #FFF;
+    top: 0;
+    #drag-region {
+        width: 100%;
+        height: 100%;
+        -webkit-app-region: drag;
+        #github {
+          -webkit-app-region: no-drag;
+          padding:10px;
+          position:fixed;
+          left:0;
+          top:0;
+          z-index:999;
+        }
+        #window-controls {
+            -webkit-app-region: no-drag;
+            display: grid;
+            grid-template-columns: repeat(2, 46px);
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+          }
+          
+          #window-controls .button {
+            user-select: none;
+            grid-row: 1 / span 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+          }
+          .button:hover {
+            background: rgba(255,255,255,0.1);
+          }
+          .button:active {
+            background: rgba(255,255,255,0.2);
+          }
+          #min-button {
+            grid-column: 1;
+          }
+          #close-button {
+            grid-column: 2;
+          }
+          #close-button:hover {
+            background: #E81123 !important;
+          }
+          #close-button:active {
+            background: #F1707A !important;
+          }
+          #close-button:active .icon {
+            filter: invert(1);
+          }
+    }
+}
+  
+  #restore-button {
+    display: none !important;
+  }
+
+@media (-webkit-device-pixel-ratio: 1.5), (device-pixel-ratio: 1.5),
+(-webkit-device-pixel-ratio: 2), (device-pixel-ratio: 2),
+(-webkit-device-pixel-ratio: 3), (device-pixel-ratio: 3) {
+  #window-controls .icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+// LOADING
+.loader{
+  position: absolute;
+  bottom:10px;
+  width: 40%;
+  text-align: center;
+}
+
+.loader-active{
+  float: right;
+  width: 40%;
+  text-align: center;
+  padding-top: 10px;
+  margin-right: 60px;
+}
+
+/*
+  Set the color of the icon
+*/
+.loader {
+  svg path,
+  svg rect{
+    fill: rgb(255, 255, 255);
+  }
+}
+
+.loader-active {
+  svg path,
+  svg rect{
+    fill: rgb(255, 255, 255);
+  }
+}
+// CARD
+
+.card-content-perso {
+    padding-bottom: 5px !important;
+}
+
+.card-index {
+    background-image: url('file:///resources/assets/background_b.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin:0px;
+    height: 340px;
+    border-radius: 0 !important;
+
+    h3 {
+        font-weight: 100;
+        font-family: 'Raleway', ;
+        font-size: 5em;
+        padding-top: 0;
+        margin-top: 0;
+        text-align: center;
+    }
+    
+    p {
+        font-size: 1.2em;
+        color: white;
+        text-align: center;
+    }
+}
+
+.card-action {
+    margin-top: 70px;
+    background-color: transparent!important;
+    border: none !important;
+
+    a {
+
+    }
+
+    #doc {
+        font-size: 1.2em;
+        margin-right:0px;
+    }
+}
+
+.card-action-valid {
+  margin-top: 50px;
+  background-color: transparent!important;
+  border: none !important;
+
+  #doc {
+      font-size: 1.2em;
+      margin-right:0px;
+  }
+}
+
+.notif-active {
+    width: auto;
+    padding: 20px;
+    font-size: 1.2em;
+    margin-left:0px;
+    background-color: rgba(255, 255, 255, 0.185);
+}
+
+.card-foot {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#ticketID, #ticketDate {
+    font-weight: 600;
+}
+#user {
+    font-weight: 700;
+}
+
+// DOCUMENTATION
+
+#documentation {
+  background-color: rgb(28, 0, 32);
+  color: white;
+
+  a {
+    color: rgb(141, 80, 255);
+  }
+}
+
+.h2-doc {
+  margin-top: 0;
+  padding-top: 20px;
+}
