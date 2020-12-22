@@ -22,7 +22,7 @@
     "electron-log": "^4.0.7",
     "electron-store": "^5.1.1",
     "jquery": "^3.5.0",
-    "node-notifier": "^5.4.3",
+    "node-notifier": "^8.0.1",
     "node-sass": "^4.13.1",
     "open": "^7.0.2",
     "puppeteer": "^2.1.1",
